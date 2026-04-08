@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: box2bend-api
+    runtime: python
+    plan: starter
+    rootDir: web
+    buildCommand: pip install -r requirements-render.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /free-trial
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: APP_BASE_URL
+        value: https://api.boxtobend.co.uk
+      - key: FULL_ACCESS_MODE
+        value: "1"
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: EMAIL_FROM
+        value: admin@boxtobend.co.uk
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "5433"
