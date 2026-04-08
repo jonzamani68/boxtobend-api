@@ -1,11 +1,10 @@
 services:
   - type: web
     name: box2bend-api
-    runtime: python
+    env: python
     plan: starter
-    rootDir: web
     buildCommand: pip install -r requirements-render.txt
-    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    startCommand: cd web && uvicorn main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /free-trial
     envVars:
       - key: PYTHON_VERSION
@@ -33,4 +32,4 @@ services:
       - key: DB_HOST
         sync: false
       - key: DB_PORT
-        value: "5433"
+        value: "5432"
